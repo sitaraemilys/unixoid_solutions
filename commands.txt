@@ -1,0 +1,52 @@
+unixoid-challenge
+
+mkdir temp
+cd temp
+gem install unixoid-challenge
+
+1. Using one command, create a directory structure "my/private/files"
+mkdir -p my/private/files
+
+2. Using one command, create a directory structure "my/public/files"
+mkdir -p my/public/files
+
+3. Create an empty file 't-vars.env' in my/private/files
+touch my/private/files/t-vars.env
+
+4. Using command-line only add the line "List of env vars that begin with T" to the file, make sure it ends with a newline
+echo “List of env vars that begin with T” >> my/private/files/t-vars.env
+vi my/private/files/t-vars.env
+insert line
+
+5. List all env variables that begin with "T" (hint: you'll need a regex that includes the marker of the start of the line) and append them to the end of the file
+env | grep ^T >> my/private/files/t-vars.env
+
+6. Export a new variable TESTING_MAKERS=working in such a way that it is still available when you open a new shell
+export TESTING_MAKERS=working
+echo "export TEXTING_MAKERS=working" >> ~/.bash_profile
+
+7. Open a new terminal window, check that a new variable is available
+echo $TESTING_MAKERS
+
+8. Output the count of the variables that begin with T to a new file my/public/files/t-vars.count, e.g. "Overall count: 5" (hint: you'll need to use 'command substitution' in bash)
+env | grep ^T | echo "Overall count: $(wc -l)" > my/public/files/t-vars.count
+
+9. Change the permissions of the my/private/files/t-vars.env to make sure that only the owner can read and write the file
+cd my/private/files
+chmod go-r my/private/files/t-vars.env
+
+10. Change the permissions of the my/private/files directory to make sure that only the owner can change into it
+chmod 700 Desktop/temp/my/private/files
+
+11. Give read and write permissions to all users on my/public/files/t-vars.count
+chmod 666 my/public/files/t-vars.count
+
+12. Create another file my/public/files/text-files-count.txt and output the number of text files in your home directory (recursively) into that file
+find ~ -name "*.txt" -print | wc -w > Desktop/temp/my/public/files/text-files-count.txt
+
+13. Create another file my/private/files/first-three-env.txt and output the first three env variables from a list of all of them sorted alphabetically
+touch my/private/files/first-three-env.txt
+env | sort | head -3 > my/private/files/first-three-env.txt
+
+14. Create another file my/private/files/commands.txt and output the contents of the history command to that file
+history > my/private/files/commands.txt
